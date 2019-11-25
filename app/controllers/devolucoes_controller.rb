@@ -1,4 +1,4 @@
-class DevolucaosController < ApplicationController
+class DevolucoesController < ApplicationController
   before_action :set_devolucao, only: [:show, :edit, :update, :destroy]
 
   # GET /devolucaos

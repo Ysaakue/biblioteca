@@ -16,4 +16,7 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'permission_role', 'permissions_roles'
+  inflect.irregular 'exemplar', 'exemplares'
+  inflect.irregular 'autor', 'autores'
+  inflect.irregular 'devolucao', 'devolucoes'
 end

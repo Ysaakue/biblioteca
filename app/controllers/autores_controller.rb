@@ -1,4 +1,4 @@
-class AutorsController < ApplicationController
+class AutoresController < ApplicationController
   before_action :set_autor, only: [:show, :edit, :update, :destroy]
 
   # GET /autors

@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403173204) do
+ActiveRecord::Schema.define(version: 20191125143421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assuntos", force: :cascade do |t|
+    t.string "descricao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "autors", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cidades", force: :cascade do |t|
     t.string "nome"
@@ -23,11 +35,62 @@ ActiveRecord::Schema.define(version: 20170403173204) do
     t.index ["estado_id"], name: "index_cidades_on_estado_id"
   end
 
+  create_table "devolucaos", force: :cascade do |t|
+    t.bigint "aluno_id"
+    t.bigint "bibliotecario_id"
+    t.float "multa"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aluno_id"], name: "index_devolucaos_on_aluno_id"
+    t.index ["bibliotecario_id"], name: "index_devolucaos_on_bibliotecario_id"
+  end
+
+  create_table "editoras", force: :cascade do |t|
+    t.string "nome"
+    t.bigint "estado_id"
+    t.bigint "cidade_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cidade_id"], name: "index_editoras_on_cidade_id"
+    t.index ["estado_id"], name: "index_editoras_on_estado_id"
+  end
+
+  create_table "emprestimos", force: :cascade do |t|
+    t.bigint "aluno_id"
+    t.bigint "bibliotecario_id"
+    t.datetime "data_prev_ret"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aluno_id"], name: "index_emprestimos_on_aluno_id"
+    t.index ["bibliotecario_id"], name: "index_emprestimos_on_bibliotecario_id"
+  end
+
   create_table "estados", force: :cascade do |t|
     t.string "nome"
     t.string "uf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "exemplares", force: :cascade do |t|
+    t.bigint "livro_id"
+    t.datetime "aquisicao"
+    t.string "situacao"
+    t.boolean "em_emprestimo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "emprestimo_id"
+    t.index ["livro_id"], name: "index_exemplares_on_livro_id"
+  end
+
+  create_table "livros", force: :cascade do |t|
+    t.string "titulo"
+    t.datetime "publicacao"
+    t.bigint "editora_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "exemplar_id"
+    t.index ["editora_id"], name: "index_livros_on_editora_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -44,6 +107,16 @@ ActiveRecord::Schema.define(version: 20170403173204) do
     t.bigint "role_id"
     t.index ["permission_id"], name: "index_permissions_roles_on_permission_id"
     t.index ["role_id"], name: "index_permissions_roles_on_role_id"
+  end
+
+  create_table "reservas", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "livro_id"
+    t.boolean "retirado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["livro_id"], name: "index_reservas_on_livro_id"
+    t.index ["user_id"], name: "index_reservas_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -98,8 +171,18 @@ ActiveRecord::Schema.define(version: 20170403173204) do
   end
 
   add_foreign_key "cidades", "estados"
+  add_foreign_key "devolucaos", "users", column: "aluno_id"
+  add_foreign_key "devolucaos", "users", column: "bibliotecario_id"
+  add_foreign_key "editoras", "cidades"
+  add_foreign_key "editoras", "estados"
+  add_foreign_key "emprestimos", "users", column: "aluno_id"
+  add_foreign_key "emprestimos", "users", column: "bibliotecario_id"
+  add_foreign_key "exemplares", "livros"
+  add_foreign_key "livros", "editoras"
   add_foreign_key "permissions_roles", "permissions"
   add_foreign_key "permissions_roles", "roles"
+  add_foreign_key "reservas", "livros"
+  add_foreign_key "reservas", "users"
   add_foreign_key "uos", "cidades"
   add_foreign_key "uos", "estados"
   add_foreign_key "users", "roles"

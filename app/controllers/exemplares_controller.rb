@@ -1,4 +1,4 @@
-class ExemplarsController < ApplicationController
+class ExemplaresController < ApplicationController
   before_action :set_exemplar, only: [:show, :edit, :update, :destroy]
 
   # GET /exemplars

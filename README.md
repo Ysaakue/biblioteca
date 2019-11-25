@@ -28,56 +28,50 @@ Versão 2.2
 1. Clone o repositório
 
   ```
-  git clone git@gitlab.ifce.edu.br:dgti/rails5apptemplate.git
+  git clone https://github.com/Ysaakue/biblioteca.git
   ```
-2. Exporte o repositório para o destino desejado do seu novo projeto (Obs: Não esqueça do / no final do path)
-
-  ```
-  cd rails5apptemplate
-  git checkout-index -a -f --prefix=/destination/path/
-  ```
-3. Instalar rvm seguindo este tutorial:
+2. Instalar rvm seguindo este tutorial:
 
   ```
   https://rvm.io/rvm/install
   ```
-4. Instalar ruby 2.4.1
+3. Instalar ruby 2.4.1
 
   ```
   rvm install 2.4.1
   gem install 'bundler'
   ```
-5. Instalar as dependências
+4. Instalar as dependências
 
   ```
   bundle install
   ```
-6. Alterar aquivo config/database.yml para refletir os usuários e senhas do seu projeto
-7. Criar usuário do PostgreSQL
+5. Alterar aquivo config/database.yml para refletir os usuários e senhas do seu projeto
+6. Criar usuário do PostgreSQL
 
   ```
   Usuário: <usuario_do_bd>
   Senha: <senha_do_bd>
   ```
-8. Criar banco de dados
+7. Criar banco de dados
 
   ```
   rake db:create
   ```
-9. Rodar as migrations
+8. Rodar as migrations
 
   ```
   rake db:migrate
   ```
-10. Criar permissões
+9. Criar permissões
 
   ```
   rake permissions:create
   ```
-11. Criar usuário padrão do sistema e popular banco de dados
+10. Criar usuário padrão do sistema e popular banco de dados
 
   ```
   rake db:seed
-  Usuário: admin@r5template.com
+  Usuário: admin@biblioteca.com
   Senha: abcd1234
   ```

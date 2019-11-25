@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignorar arquivos de desenvolvimento
+.byebug_history
+.ruby-version

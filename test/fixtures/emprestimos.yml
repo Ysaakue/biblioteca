@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aluno: one
+  bibliotecario: one
+  data_prev_ret: 2019-11-25 10:44:03
+
+two:
+  aluno: two
+  bibliotecario: two
+  data_prev_ret: 2019-11-25 10:44:03

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Livro:</strong>
+  <%= @exemplar.livro %>
+</p>
+
+<p>
+  <strong>Emprestimo:</strong>
+  <%= @exemplar.emprestimo %>
+</p>
+
+<p>
+  <strong>Aquisicao:</strong>
+  <%= @exemplar.aquisicao %>
+</p>
+
+<p>
+  <strong>Situacao:</strong>
+  <%= @exemplar.situacao %>
+</p>
+
+<p>
+  <strong>Em emprestimo:</strong>
+  <%= @exemplar.em_emprestimo %>
+</p>
+
+<%= link_to 'Edit', edit_exemplar_path(@exemplar) %> |
+<%= link_to 'Back', exemplars_path %>

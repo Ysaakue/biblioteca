@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Criando um usuário com a role Super Admin
-default_user_email = "admin@r5template.com"
+default_user_email = "admin@biblioteca.com"
 default_user_password = "abcd1234"
 
 #Criando a role com todas as permissões

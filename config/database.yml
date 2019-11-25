@@ -1,17 +1,17 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: sigproext_development
+  database: biblioteca_development
   pool: 5
   host: localhost
-  username: sigproext
-  password: sigproext
+  username: biblioteca
+  password: biblioteca
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: sigproext_production
+  database: biblioteca_production
   pool: 5
   host: localhost
-  username: sigproext
-  password: sigproext
+  username: biblioteca
+  password: biblioteca

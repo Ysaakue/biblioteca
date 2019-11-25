@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :emprestimos
+  resources :devolucaos
+  resources :exemplars
+  resources :reservas
+  resources :livros
+  resources :editoras
+  resources :assuntos
+  resources :autors
   get 'home' => 'home#index'
 
   # Resources - Admin

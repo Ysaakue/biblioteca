@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Aluno:</strong>
+  <%= @devolucao.aluno %>
+</p>
+
+<p>
+  <strong>Bibliotecario:</strong>
+  <%= @devolucao.bibliotecario %>
+</p>
+
+<p>
+  <strong>Multa:</strong>
+  <%= @devolucao.multa %>
+</p>
+
+<%= link_to 'Edit', edit_devolucao_path(@devolucao) %> |
+<%= link_to 'Back', devolucaos_path %>

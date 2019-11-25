@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  livro: one
+  emprestimo: one
+  aquisicao: 2019-11-25 10:36:32
+  situacao: MyString
+  em_emprestimo: false
+
+two:
+  livro: two
+  emprestimo: two
+  aquisicao: 2019-11-25 10:36:32
+  situacao: MyString
+  em_emprestimo: false

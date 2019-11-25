@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aluno: one
+  bibliotecario: one
+  multa: 1.5
+
+two:
+  aluno: two
+  bibliotecario: two
+  multa: 1.5

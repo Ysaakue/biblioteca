@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Aluno:</strong>
+  <%= @emprestimo.aluno %>
+</p>
+
+<p>
+  <strong>Bibliotecario:</strong>
+  <%= @emprestimo.bibliotecario %>
+</p>
+
+<p>
+  <strong>Data prev ret:</strong>
+  <%= @emprestimo.data_prev_ret %>
+</p>
+
+<%= link_to 'Edit', edit_emprestimo_path(@emprestimo) %> |
+<%= link_to 'Back', emprestimos_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  publicacao: 2019-11-25 10:26:30
+  editora: one
+  exemplar: 
+
+two:
+  titulo: MyString
+  publicacao: 2019-11-25 10:26:30
+  editora: two
+  exemplar: 

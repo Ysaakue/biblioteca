@@ -1,0 +1,13 @@
+<%= simple_form_for(@emprestimo) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :aluno %>
+    <%= f.association :bibliotecario %>
+    <%= f.input :data_prev_ret %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

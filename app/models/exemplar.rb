@@ -1,4 +1,4 @@
 class Exemplar < ApplicationRecord
   belongs_to :livro
-  belongs_to :emprestimo
+  has_and_belongs_to_many :emprestimos
 end

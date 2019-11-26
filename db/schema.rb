@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191125143421) do
+ActiveRecord::Schema.define(version: 20191126191837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 20191125143421) do
     t.boolean "em_emprestimo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "emprestimo_id"
     t.index ["livro_id"], name: "index_exemplares_on_livro_id"
   end
 
@@ -90,7 +89,13 @@ ActiveRecord::Schema.define(version: 20191125143421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exemplar_id"
+    t.integer "assunto_id"
     t.index ["editora_id"], name: "index_livros_on_editora_id"
+  end
+
+  create_table "livros_autores", id: false, force: :cascade do |t|
+    t.integer "livros_id"
+    t.integer "autor_id"
   end
 
   create_table "permissions", force: :cascade do |t|

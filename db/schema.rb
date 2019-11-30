@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191126191837) do
+ActiveRecord::Schema.define(version: 20191130195859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20191126191837) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "autors", force: :cascade do |t|
+  create_table "autores", force: :cascade do |t|
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,14 +35,15 @@ ActiveRecord::Schema.define(version: 20191126191837) do
     t.index ["estado_id"], name: "index_cidades_on_estado_id"
   end
 
-  create_table "devolucaos", force: :cascade do |t|
+  create_table "devolucoes", force: :cascade do |t|
     t.bigint "aluno_id"
     t.bigint "bibliotecario_id"
     t.float "multa"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["aluno_id"], name: "index_devolucaos_on_aluno_id"
-    t.index ["bibliotecario_id"], name: "index_devolucaos_on_bibliotecario_id"
+    t.integer "emprestimo_id"
+    t.index ["aluno_id"], name: "index_devolucoes_on_aluno_id"
+    t.index ["bibliotecario_id"], name: "index_devolucoes_on_bibliotecario_id"
   end
 
   create_table "editoras", force: :cascade do |t|
@@ -63,6 +64,11 @@ ActiveRecord::Schema.define(version: 20191126191837) do
     t.datetime "updated_at", null: false
     t.index ["aluno_id"], name: "index_emprestimos_on_aluno_id"
     t.index ["bibliotecario_id"], name: "index_emprestimos_on_bibliotecario_id"
+  end
+
+  create_table "emprestimos_exemplares", id: false, force: :cascade do |t|
+    t.integer "emprestimo_id"
+    t.integer "exemplar_id"
   end
 
   create_table "estados", force: :cascade do |t|
@@ -176,8 +182,8 @@ ActiveRecord::Schema.define(version: 20191126191837) do
   end
 
   add_foreign_key "cidades", "estados"
-  add_foreign_key "devolucaos", "users", column: "aluno_id"
-  add_foreign_key "devolucaos", "users", column: "bibliotecario_id"
+  add_foreign_key "devolucoes", "users", column: "aluno_id"
+  add_foreign_key "devolucoes", "users", column: "bibliotecario_id"
   add_foreign_key "editoras", "cidades"
   add_foreign_key "editoras", "estados"
   add_foreign_key "emprestimos", "users", column: "aluno_id"

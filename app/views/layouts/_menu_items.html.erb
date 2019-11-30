@@ -46,7 +46,7 @@
 <% if can?(:index, Emprestimo) %>
   <li class="<%= 'active' if params[:controller] == 'admin/emprestimos' %>">
     <%= link_to admin_emprestimos_path do %>
-      <i class="fa fa-cubes fa-fw"></i>
+      <i class="fa fa-arrow-circle-o-right fa-fw"></i>
       Emprestimos
     <% end %>
   </li>
@@ -64,7 +64,7 @@
 <% if can?(:index, Autor) %>
   <li class="<%= 'active' if params[:controller] == 'admin/autores' %>">
     <%= link_to admin_autores_path do %>
-      <i class="fa fa-cubes fa-fw"></i>
+      <i class="fa fa-pencil-square-o fa-fw"></i>
       Autores
     <% end %>
   </li>
@@ -73,7 +73,7 @@
 <% if can?(:index, Devolucao) %>
   <li class="<%= 'active' if params[:controller] == 'admin/devolucoes' %>">
     <%= link_to admin_devolucoes_path do %>
-      <i class="fa fa-cubes fa-fw"></i>
+      <i class="fa fa-arrow-circle-o-left fa-fw"></i>
       Devoluções
     <% end %>
   </li>
@@ -91,7 +91,7 @@
 <% if can?(:index, Exemplar) %>
   <li class="<%= 'active' if params[:controller] == 'admin/exemplares' %>">
     <%= link_to admin_exemplares_path do %>
-      <i class="fa fa-cubes fa-fw"></i>
+      <i class="fa fa-book fa-fw"></i>
       Exemplares
     <% end %>
   </li>
@@ -100,7 +100,7 @@
 <% if can?(:index, Livro) %>
   <li class="<%= 'active' if params[:controller] == 'admin/livros' %>">
     <%= link_to admin_livros_path do %>
-      <i class="fa fa-cubes fa-fw"></i>
+      <i class="fa fa-book fa-fw"></i>
       Livros
     <% end %>
   </li>

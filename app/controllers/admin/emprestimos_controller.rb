@@ -4,7 +4,9 @@ class Admin::EmprestimosController < ApplicationController
   # GET /emprestimos
   # GET /emprestimos.json
   def index
-    @emprestimos = Emprestimo.all
+    @q = Emprestimo.order("created_at DESC").search(params[:q])
+    @emprestimos = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /emprestimos/1

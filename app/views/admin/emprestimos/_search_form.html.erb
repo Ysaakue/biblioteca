@@ -1,0 +1,42 @@
+<% content_for :action_buttons do %>
+  <% if can?(:create, "Emprestimo".constantize) %>
+    <%= link_to new_admin_emprestimo_path, class: 'btn btn-xs btn-primary right' do %>
+      <i class="fa fa-plus"></i>
+      Novo Emprestimo
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :search_form do %>
+  <%= search_form_for [:admin, @q], html: {class: "navbar-form navbar-left", id: "filter-form", role: "search" } do |s| %>
+    <div class="form-group margin-right-5">
+      <%= s.label :dt_prev_fim_gteq, "Data de devolução a partir de" %>
+    </div>
+    <div class="form-group">
+      <div class="input-group datetime">
+        <%= s.text_field :data_prev_dev_gteq, :value => @q.data_prev_dev_gteq.blank? ? nil : l(@q.data_prev_dev_gteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </div>
+    <div class="form-group margin-right-5">
+      &nbsp;
+      <%= s.label :data_prev_dev_lteq, "a" %>
+    </div>
+    <div class="form-group">
+      <div class="input-group datetime">
+        <%= s.text_field :data_prev_dev_lteq, :value => @q.data_prev_dev_lteq.blank? ? nil : l(@q.data_prev_dev_lteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </div>
+    <%= link_to "", class: "btn btn-sm btn-success btn-filter-search" do %>
+      <i class="fa fa-search"></i>
+      Buscar
+    <% end %>
+    <%= link_to admin_roles_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
+      <i class="fa fa-remove"></i>
+      Limpar
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render :template => 'layouts/search_form_template' %>

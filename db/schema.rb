@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20191130195859) do
     t.bigint "aluno_id"
     t.bigint "bibliotecario_id"
     t.float "multa"
+    t.date "dt_dev"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "emprestimo_id"
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 20191130195859) do
   create_table "emprestimos", force: :cascade do |t|
     t.bigint "aluno_id"
     t.bigint "bibliotecario_id"
-    t.datetime "data_prev_ret"
+    t.date "data_prev_dev"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["aluno_id"], name: "index_emprestimos_on_aluno_id"
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(version: 20191130195859) do
 
   create_table "exemplares", force: :cascade do |t|
     t.bigint "livro_id"
-    t.datetime "aquisicao"
+    t.date "aquisicao"
     t.string "situacao"
     t.boolean "em_emprestimo"
     t.datetime "created_at", null: false
@@ -90,7 +91,7 @@ ActiveRecord::Schema.define(version: 20191130195859) do
 
   create_table "livros", force: :cascade do |t|
     t.string "titulo"
-    t.datetime "publicacao"
+    t.date "publicacao"
     t.bigint "editora_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

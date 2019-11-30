@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class AutorsControllerTest < ActionDispatch::IntegrationTest
+class AutoresControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @autor = autors(:one)
+    @autor = autores(:one)
   end
 
   test "should get index" do
-    get autors_url
+    get autores_url
     assert_response :success
   end
 
@@ -17,7 +17,7 @@ class AutorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create autor" do
     assert_difference('Autor.count') do
-      post autors_url, params: { autor: { nome: @autor.nome } }
+      post autores_url, params: { autor: { nome: @autor.nome } }
     end
 
     assert_redirected_to autor_url(Autor.last)
@@ -43,6 +43,6 @@ class AutorsControllerTest < ActionDispatch::IntegrationTest
       delete autor_url(@autor)
     end
 
-    assert_redirected_to autors_url
+    assert_redirected_to autores_url
   end
 end

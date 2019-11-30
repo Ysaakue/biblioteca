@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-class DevolucaosTest < ApplicationSystemTestCase
+class DevolucoesTest < ApplicationSystemTestCase
   # test "visiting the index" do
-  #   visit devolucaos_url
+  #   visit devolucoes_url
   #
   #   assert_selector "h1", text: "Devolucao"
   # end

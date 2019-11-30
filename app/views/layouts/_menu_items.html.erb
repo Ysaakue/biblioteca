@@ -42,3 +42,75 @@
     </ul>
   </li>
 <% end %>
+
+<% if can?(:index, Emprestimo) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/emprestimos' %>">
+    <%= link_to admin_emprestimos_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Emprestimos
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Assunto) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/assuntos' %>">
+    <%= link_to admin_assuntos_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Assuntos
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Autor) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/autores' %>">
+    <%= link_to admin_autores_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Autores
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Devolucao) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/devolucoes' %>">
+    <%= link_to admin_devolucoes_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Devoluções
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Editora) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/editoras' %>">
+    <%= link_to admin_editoras_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Editoras
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Exemplar) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/exemplares' %>">
+    <%= link_to admin_exemplares_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Exemplares
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Livro) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/livros' %>">
+    <%= link_to admin_livros_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Livros
+    <% end %>
+  </li>
+<% end %>
+
+<% if can?(:index, Reserva) %>
+  <li class="<%= 'active' if params[:controller] == 'admin/reservas' %>">
+    <%= link_to admin_reservas_path do %>
+      <i class="fa fa-cubes fa-fw"></i>
+      Reservas
+    <% end %>
+  </li>
+<% end %>

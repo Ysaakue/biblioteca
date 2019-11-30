@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class ExemplarsControllerTest < ActionDispatch::IntegrationTest
+class ExemplaresControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @exemplar = exemplars(:one)
+    @exemplar = exemplares(:one)
   end
 
   test "should get index" do
-    get exemplars_url
+    get exemplares_url
     assert_response :success
   end
 
@@ -17,7 +17,7 @@ class ExemplarsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create exemplar" do
     assert_difference('Exemplar.count') do
-      post exemplars_url, params: { exemplar: { aquisicao: @exemplar.aquisicao, em_emprestimo: @exemplar.em_emprestimo, emprestimo_id: @exemplar.emprestimo_id, livro_id: @exemplar.livro_id, situacao: @exemplar.situacao } }
+      post exemplares_url, params: { exemplar: { aquisicao: @exemplar.aquisicao, em_emprestimo: @exemplar.em_emprestimo, emprestimo_id: @exemplar.emprestimo_id, livro_id: @exemplar.livro_id, situacao: @exemplar.situacao } }
     end
 
     assert_redirected_to exemplar_url(Exemplar.last)
@@ -43,6 +43,6 @@ class ExemplarsControllerTest < ActionDispatch::IntegrationTest
       delete exemplar_url(@exemplar)
     end
 
-    assert_redirected_to exemplars_url
+    assert_redirected_to exemplares_url
   end
 end

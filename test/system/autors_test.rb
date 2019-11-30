@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-class AutorsTest < ApplicationSystemTestCase
+class AutoresTest < ApplicationSystemTestCase
   # test "visiting the index" do
-  #   visit autors_url
+  #   visit autores_url
   #
   #   assert_selector "h1", text: "Autor"
   # end

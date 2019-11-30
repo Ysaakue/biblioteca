@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  resources :emprestimos
-  resources :devolucaos
-  resources :exemplars
-  resources :reservas
-  resources :livros
-  resources :editoras
-  resources :assuntos
-  resources :autors
   get 'home' => 'home#index'
 
   # Resources - Admin
@@ -18,6 +10,14 @@ Rails.application.routes.draw do
       end
     end
     resources :roles
+    resources :emprestimos
+    resources :devolucoes
+    resources :exemplares
+    resources :reservas
+    resources :livros
+    resources :editoras
+    resources :assuntos
+    resources :autores
   end
 
   # You can have the root of your site routed with "root"

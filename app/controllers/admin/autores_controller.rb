@@ -4,7 +4,9 @@ class Admin::AutoresController < ApplicationController
   # GET /autores
   # GET /autores.json
   def index
-    @autores = Autor.all
+    @q = Autor.order("nome ASC").search(params[:q])
+    @autores = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /autores/1
@@ -28,7 +30,7 @@ class Admin::AutoresController < ApplicationController
 
     respond_to do |format|
       if @autor.save
-        format.html { redirect_to @autor, notice: 'Autor was successfully created.' }
+        format.html { redirect_to admin_autor_path(@autor), notice: 'Autor foi criado com sucesso. ' }
         format.json { render :show, status: :created, location: @autor }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class Admin::AutoresController < ApplicationController
   def update
     respond_to do |format|
       if @autor.update(autor_params)
-        format.html { redirect_to @autor, notice: 'Autor was successfully updated.' }
+        format.html { redirect_to admin_autor_path(@autor), notice: 'Edição concluída com sucesso.' }
         format.json { render :show, status: :ok, location: @autor }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class Admin::AutoresController < ApplicationController
   def destroy
     @autor.destroy
     respond_to do |format|
-      format.html { redirect_to autores_url, notice: 'Autor was successfully destroyed.' }
+      format.html { redirect_to admin_autores_path, notice: 'Autor foi excluído com sucesso. ' }
       format.json { head :no_content }
     end
   end

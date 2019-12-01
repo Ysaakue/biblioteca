@@ -225,7 +225,7 @@ DEPENDENCIES
   kaminari
   meiomask-rails
   nprogress-rails
-  pg
+  pg (~> 0.21.0)
   puma
   rails (= 5.1.2)
   rails-i18n

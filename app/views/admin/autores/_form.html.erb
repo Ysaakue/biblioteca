@@ -1,11 +1,10 @@
-<%= simple_form_for(@autor) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
+<div class="row">
+  <div class="col-sm-8">
+  <%= simple_form_for([:admin, @autor], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
     <%= f.input :nome %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+      <%= f.submit "Salvar", :class => 'btn btn-primary' %>
+      <%= link_to "Cancelar", admin_autores_path, :class => 'btn btn-default' %>
+    </div>
+  <% end %>
+</div>
+</div>

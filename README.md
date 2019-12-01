@@ -47,8 +47,8 @@ Versão 2.2
   ```
   bundle install
   ```
-5. Alterar aquivo config/database.yml para refletir os usuários e senhas do seu projeto
-6. Criar usuário do PostgreSQL
+5. Criar usuário do PostgreSQL
+6. Alterar aquivo config/database.yml para refletir os usuários e senhas do postgreSQL
 
   ```
   Usuário: <usuario_do_bd>
@@ -73,6 +73,4 @@ Versão 2.2
 
   ```
   rake db:seed
-  Usuário: admin@biblioteca.com
-  Senha: abcd1234
   ```

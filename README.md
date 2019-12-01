@@ -30,15 +30,16 @@ Versão 2.2
   ```
   git clone https://github.com/Ysaakue/biblioteca.git
   ```
-2. Instalar rvm seguindo este tutorial:
+2. Instalar rbenv seguindo este tutorial:
 
   ```
-  https://rvm.io/rvm/install
+  https://gorails.com/setup/ubuntu/
   ```
 3. Instalar ruby 2.4.1
 
   ```
-  rvm install 2.4.1
+  rbenv install 2.4.1
+  rbenv local 2.4.1
   gem install 'bundler'
   ```
 4. Instalar as dependências

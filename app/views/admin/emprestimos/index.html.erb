@@ -22,9 +22,10 @@
             <tbody>
               <% @emprestimos.each do |emprestimo| %>
                 <tr>
-                  <td><%= emprestimo.aluno.nome %></td>
-                  <td><%= emprestimo.bibliotecario.nome %></td>
-                  <td><%= ldate emprestimo.data_prev_dev :long %></td>
+                  <td><%= User.find(emprestimo.aluno_id).nome %></td>
+                  <td><%= User.find(emprestimo.bibliotecario_id).nome %></td>
+                  
+                  <td><%= emprestimo.data_prev_dev %></td>
                   <td>
                     <%= link_to 'Exibir', admin_emprestimo_path(emprestimo), class: 'btn btn-xs btn-default' %>
                     <%= link_to 'Editar', edit_admin_emprestimo_path(emprestimo), class: 'btn btn-xs btn-default' %>

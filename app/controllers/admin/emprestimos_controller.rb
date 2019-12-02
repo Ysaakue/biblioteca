@@ -7,6 +7,9 @@ class Admin::EmprestimosController < ApplicationController
     @q = Emprestimo.order("created_at DESC").search(params[:q])
     @emprestimos = @q.result.page(params[:page])
     @total_registros = @q.result.count
+
+    @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
+    @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
   end
 
   # GET /emprestimos/1
@@ -17,6 +20,9 @@ class Admin::EmprestimosController < ApplicationController
   # GET /emprestimos/new
   def new
     @emprestimo = Emprestimo.new
+    @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
+    @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
+
   end
 
   # GET /emprestimos/1/edit
@@ -26,11 +32,12 @@ class Admin::EmprestimosController < ApplicationController
   # POST /emprestimos
   # POST /emprestimos.json
   def create
-    @emprestimo = Emprestimo.new(emprestimo_params)
+    set_users
+    @emprestimo = Emprestimo.new(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev))
 
     respond_to do |format|
       if @emprestimo.save
-        format.html { redirect_to @emprestimo, notice: 'Emprestimo was successfully created.' }
+        format.html { redirect_to admin_emprestimo_path(@emprestimo), notice: 'Emprestimo was successfully created.' }
         format.json { render :show, status: :created, location: @emprestimo }
       else
         format.html { render :new }
@@ -42,9 +49,10 @@ class Admin::EmprestimosController < ApplicationController
   # PATCH/PUT /emprestimos/1
   # PATCH/PUT /emprestimos/1.json
   def update
+    set_users
     respond_to do |format|
-      if @emprestimo.update(emprestimo_params)
-        format.html { redirect_to @emprestimo, notice: 'Emprestimo was successfully updated.' }
+      if @emprestimo.update(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev))
+        format.html { redirect_to admin_emprestimo_path(@emprestimo), notice: 'Emprestimo was successfully updated.' }
         format.json { render :show, status: :ok, location: @emprestimo }
       else
         format.html { render :edit }
@@ -58,7 +66,7 @@ class Admin::EmprestimosController < ApplicationController
   def destroy
     @emprestimo.destroy
     respond_to do |format|
-      format.html { redirect_to emprestimos_url, notice: 'Emprestimo was successfully destroyed.' }
+      format.html { redirect_to admin_emprestimos_path, notice: 'Emprestimo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +79,12 @@ class Admin::EmprestimosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def emprestimo_params
-      params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_ret)
+      params.require(:emprestimo).permit(:aluno, :bibliotecario, :data_prev_dev)
     end
+
+    def set_users
+      params[:emprestimo][:aluno_id]= params[:emprestimo][:aluno]
+      params[:emprestimo][:bibliotecario_id]= params[:emprestimo][:bibliotecario]
+    end
+
 end

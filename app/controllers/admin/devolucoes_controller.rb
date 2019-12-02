@@ -4,7 +4,12 @@ class Admin::DevolucoesController < ApplicationController
   # GET /devolucoes
   # GET /devolucoes.json
   def index
-    @devolucoes = Devolucao.all
+    @q = Devolucao.order("created_at ASC").search(params[:q])
+    @devolucoes = @q.result.page(params[:page])
+    @total_registros = @q.result.count
+
+    @alunos = User.order("nome ASC").where("role_id = ?", 2).all
+    @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all
   end
 
   # GET /devolucoes/1

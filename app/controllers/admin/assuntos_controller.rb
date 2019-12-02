@@ -30,7 +30,7 @@ class Admin::AssuntosController < ApplicationController
 
     respond_to do |format|
       if @assunto.save
-        format.html { redirect_to @assunto, notice: 'Assunto was successfully created.' }
+        format.html { redirect_to admin_assunto_path(@assunto), notice: 'Assunto was successfully created.' }
         format.json { render :show, status: :created, location: @assunto }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class Admin::AssuntosController < ApplicationController
   def update
     respond_to do |format|
       if @assunto.update(assunto_params)
-        format.html { redirect_to @assunto, notice: 'Assunto was successfully updated.' }
+        format.html { redirect_to admin_assunto_path(@assunto), notice: 'Assunto was successfully updated.' }
         format.json { render :show, status: :ok, location: @assunto }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class Admin::AssuntosController < ApplicationController
   def destroy
     @assunto.destroy
     respond_to do |format|
-      format.html { redirect_to assuntos_url, notice: 'Assunto was successfully destroyed.' }
+      format.html { redirect_to admin_assuntos_url, notice: 'Assunto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

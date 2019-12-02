@@ -1,8 +1,8 @@
 <% content_for :action_buttons do %>
-  <% if can?(:create, "Autor".constantize) %>
-    <%= link_to new_admin_autor_path, class: 'btn btn-xs btn-primary right' do %>
+  <% if can?(:create, "Devolucao".constantize) %>
+    <%= link_to new_admin_devolucao_path, class: 'btn btn-xs btn-primary right' do %>
       <i class="fa fa-plus"></i>
-      Novo Autor
+      Nova Devolução
     <% end %>
   <% end %>
 <% end %>
@@ -10,25 +10,21 @@
 <% content_for :search_form do %>
   <%= search_form_for [:admin, @q], html: {class: "navbar-form navbar-left", id: "filter-form", role: "search" } do |s| %>
     <div class="form-group margin-right-5">
-      <%= s.label :nome_cont, "Nome" %>
-      <%= s.search_field :nome_cont, :class => "form-control" %>
-    </div>
-    <div class="form-group margin-right-5">
-      <%= s.label :dt_dev_gteq, "Data de devolução a partir de" %>
+      <%= s.label :created_at_gteq, "Data de devolução a partir de" %>
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :dt_dev_gteq, :value => @q.dt_dev_gteq.blank? ? nil : l(@q.dt_dev_gteq, :format => :long), :id => "acao_dt_dev", class: "form-control date-picker" %>
+        <%= s.text_field :created_at_gteq, :value => @q.created_at_gteq.blank? ? nil : l(@q.created_at_gteq, :format => :long), :id => "acao_created_at", class: "form-control date-picker" %>
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
       </div>
     </div>
     <div class="form-group margin-right-5">
       &nbsp;
-      <%= s.label :dt_dev_lteq, "a" %>
+      <%= s.label :created_at_lteq, "a" %>
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :dt_dev_lteq, :value => @q.dt_dev_lteq.blank? ? nil : l(@q.dt_dev_lteq, :format => :long), :id => "acao_dt_dev", class: "form-control date-picker" %>
+        <%= s.text_field :created_at_lteq, :value => @q.created_at_lteq.blank? ? nil : l(@q.created_at_lteq, :format => :long), :id => "acao_created_at", class: "form-control date-picker" %>
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
       </div>
     </div>
@@ -38,19 +34,19 @@
     
     <div class="form-group margin-right-5">
       &nbsp;
-      <%= s.label :dt_dev_lteq, "a" %>
+      <%= s.label :created_at_lteq, "a" %>
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :dt_dev_lteq, :value => @q.dt_dev_lteq.blank? ? nil : l(@q.dt_dev_lteq, :format => :long), :id => "acao_dt_dev", class: "form-control date-picker" %>
-        <span class="input-group-addon"><%= glyph(:calendar) %></span>
+        <%= s.text_field :created_at_lteq, :value => @q.dt_dev_lteq.blank? ? nil : l(@q.dt_dev_lteq, :format => :long), :id => "devolucao_dt_dev", class: "form-control date-picker" %>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
       </div>
     </div>
     <%= link_to "", class: "btn btn-sm btn-success btn-filter-search" do %>
       <i class="fa fa-search"></i>
       Buscar
     <% end %>
-    <%= link_to admin_roles_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
+    <%= link_to admin_devolucoes_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
       <i class="fa fa-remove"></i>
       Limpar
     <% end %>

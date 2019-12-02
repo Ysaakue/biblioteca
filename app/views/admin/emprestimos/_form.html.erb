@@ -1,13 +1,17 @@
-<%= simple_form_for(@emprestimo) do |f| %>
-  <%= f.error_notification %>
+<div class="row">
+  <div class="col-sm-8">
+    <%= simple_form_for([:admin, @emprestimo], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
+      <div class="form-inputs">
+        <%=f.association :aluno, collection: @alunos%>
+        <%=f.association :bibliotecario, collection: @bibliotecarios%>
+        <%=f.input :data_prev_dev, as: :hidden, :input_html => { :value => Time.now } %>
+      </div>
 
-  <div class="form-inputs">
-    <%= f.association :aluno %>
-    <%= f.association :bibliotecario %>
-    <%= f.input :data_prev_ret %>
+      <div class="form-actions">
+        <%= f.submit "Salvar", :class => 'btn btn-primary' %>
+        <%= link_to "Cancelar", admin_emprestimos_path, :class => 'btn btn-default' %>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>

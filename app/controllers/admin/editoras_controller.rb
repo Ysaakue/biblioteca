@@ -4,7 +4,9 @@ class Admin::EditorasController < ApplicationController
   # GET /editoras
   # GET /editoras.json
   def index
-    @editoras = Editora.all
+    @q = Editora.order("nome ASC").search(params[:q])
+    @editoras = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /editoras/1
@@ -28,7 +30,7 @@ class Admin::EditorasController < ApplicationController
 
     respond_to do |format|
       if @editora.save
-        format.html { redirect_to @editora, notice: 'Editora was successfully created.' }
+        format.html { redirect_to admin_editora_path(@editora), notice: 'Editora was successfully created.' }
         format.json { render :show, status: :created, location: @editora }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class Admin::EditorasController < ApplicationController
   def update
     respond_to do |format|
       if @editora.update(editora_params)
-        format.html { redirect_to @editora, notice: 'Editora was successfully updated.' }
+        format.html { redirect_to admin_editora_path(@editora), notice: 'Editora was successfully updated.' }
         format.json { render :show, status: :ok, location: @editora }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class Admin::EditorasController < ApplicationController
   def destroy
     @editora.destroy
     respond_to do |format|
-      format.html { redirect_to editoras_url, notice: 'Editora was successfully destroyed.' }
+      format.html { redirect_to admin_editoras_path, notice: 'Editora was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

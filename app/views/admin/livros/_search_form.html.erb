@@ -20,14 +20,14 @@
     <div class="form-group">
       <div class="input-group datetime">
         <%= s.text_field :publicacao_lteq, :value => @q.publicacao_lteq.blank? ? nil : l(@q.publicacao_lteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
-        <span class="input-group-addon"><%= glyph(:calendar) %></span>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
       </div>
     </div>
     <%= link_to "", class: "btn btn-sm btn-success btn-filter-search" do %>
       <i class="fa fa-search"></i>
       Buscar
     <% end %>
-    <%= link_to admin_roles_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
+    <%= link_to admin_livros_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
       <i class="fa fa-remove"></i>
       Limpar
     <% end %>

@@ -27,6 +27,11 @@ ActiveRecord::Schema.define(version: 20191130195859) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "autores_livros", id: false, force: :cascade do |t|
+    t.integer "livros_id"
+    t.integer "autor_id"
+  end
+
   create_table "cidades", force: :cascade do |t|
     t.string "nome"
     t.bigint "estado_id"
@@ -36,15 +41,11 @@ ActiveRecord::Schema.define(version: 20191130195859) do
   end
 
   create_table "devolucoes", force: :cascade do |t|
-    t.bigint "aluno_id"
-    t.bigint "bibliotecario_id"
     t.float "multa"
     t.date "dt_dev"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "emprestimo_id"
-    t.index ["aluno_id"], name: "index_devolucoes_on_aluno_id"
-    t.index ["bibliotecario_id"], name: "index_devolucoes_on_bibliotecario_id"
   end
 
   create_table "editoras", force: :cascade do |t|
@@ -80,29 +81,20 @@ ActiveRecord::Schema.define(version: 20191130195859) do
   end
 
   create_table "exemplares", force: :cascade do |t|
-    t.bigint "livro_id"
     t.date "aquisicao"
     t.string "situacao"
     t.boolean "em_emprestimo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["livro_id"], name: "index_exemplares_on_livro_id"
   end
 
   create_table "livros", force: :cascade do |t|
     t.string "titulo"
     t.date "publicacao"
-    t.bigint "editora_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exemplar_id"
     t.integer "assunto_id"
-    t.index ["editora_id"], name: "index_livros_on_editora_id"
-  end
-
-  create_table "livros_autores", id: false, force: :cascade do |t|
-    t.integer "livros_id"
-    t.integer "autor_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -122,13 +114,9 @@ ActiveRecord::Schema.define(version: 20191130195859) do
   end
 
   create_table "reservas", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "livro_id"
     t.boolean "retirado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["livro_id"], name: "index_reservas_on_livro_id"
-    t.index ["user_id"], name: "index_reservas_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -183,18 +171,12 @@ ActiveRecord::Schema.define(version: 20191130195859) do
   end
 
   add_foreign_key "cidades", "estados"
-  add_foreign_key "devolucoes", "users", column: "aluno_id"
-  add_foreign_key "devolucoes", "users", column: "bibliotecario_id"
   add_foreign_key "editoras", "cidades"
   add_foreign_key "editoras", "estados"
   add_foreign_key "emprestimos", "users", column: "aluno_id"
   add_foreign_key "emprestimos", "users", column: "bibliotecario_id"
-  add_foreign_key "exemplares", "livros"
-  add_foreign_key "livros", "editoras"
   add_foreign_key "permissions_roles", "permissions"
   add_foreign_key "permissions_roles", "roles"
-  add_foreign_key "reservas", "livros"
-  add_foreign_key "reservas", "users"
   add_foreign_key "uos", "cidades"
   add_foreign_key "uos", "estados"
   add_foreign_key "users", "roles"

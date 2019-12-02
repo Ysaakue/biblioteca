@@ -1,5 +1,12 @@
-<h1>New Devolução</h1>
-
-<%= render 'form', devolucao: @devolucao %>
-
-<%= link_to 'Back', devolucoes_path %>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h2>Nova Devolução</h2>
+			</div>
+			<div class="ibox-content">
+				<%= render :partial => 'form' %>
+			</div>
+		</div>
+	</div>
+</div>

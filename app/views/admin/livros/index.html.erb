@@ -1,33 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Livros</h1>
+</div>
 
-<h1>Livros</h1>
+<%= render partial: "search_form" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titulo</th>
-      <th>Publicacao</th>
-      <th>Editora</th>
-      <th>Exemplar</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @livros.each do |livro| %>
-      <tr>
-        <td><%= livro.titulo %></td>
-        <td><%= livro.publicacao %></td>
-        <td><%= livro.editora %></td>
-        <td><%= livro.exemplar %></td>
-        <td><%= link_to 'Show', livro %></td>
-        <td><%= link_to 'Edit', edit_livro_path(livro) %></td>
-        <td><%= link_to 'Destroy', livro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Livro', new_admin_livro_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Titulo</th>
+                <th>Publicacao</th>
+                <th>Editora</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @livros.each do |livro| %>
+                <tr>
+                  <td><%= livro.titulo %></td>
+                  <td><%= ldate livro.publicacao, :long %></td>
+                  <td><%= livro.editora.nome %></td>
+                  <td>
+                    <%= link_to 'Exibir', admin_livro_path(livro), class: 'btn btn-xs btn-default' %>
+                    <%= link_to 'Editar', edit_admin_livro_path(livro), class: 'btn btn-xs btn-default' %>
+                    <%= link_to 'Deletar', admin_livro_path(livro), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-xs btn-danger' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @livros %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

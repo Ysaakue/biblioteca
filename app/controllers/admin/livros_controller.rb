@@ -4,7 +4,9 @@ class Admin::LivrosController < ApplicationController
   # GET /livros
   # GET /livros.json
   def index
-    @livros = Livro.all
+    @q = Livro.order("titulo ASC").search(params[:q])
+    @livros = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /livros/1
@@ -15,10 +17,12 @@ class Admin::LivrosController < ApplicationController
   # GET /livros/new
   def new
     @livro = Livro.new
+    @editoras = Editora.order("created_at DESC").all.collect {|e| [e.nome, e.id]}
   end
 
   # GET /livros/1/edit
   def edit
+    @editoras = Editora.order("created_at DESC").all.collect {|e| [e.nome, e.id]}
   end
 
   # POST /livros
@@ -28,7 +32,7 @@ class Admin::LivrosController < ApplicationController
 
     respond_to do |format|
       if @livro.save
-        format.html { redirect_to @livro, notice: 'Livro was successfully created.' }
+        format.html { redirect_to admin_livro_path(@livro), notice: 'Livro was successfully created.' }
         format.json { render :show, status: :created, location: @livro }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class Admin::LivrosController < ApplicationController
   def update
     respond_to do |format|
       if @livro.update(livro_params)
-        format.html { redirect_to @livro, notice: 'Livro was successfully updated.' }
+        format.html { redirect_to admin_livro_path(@livro), notice: 'Livro was successfully updated.' }
         format.json { render :show, status: :ok, location: @livro }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class Admin::LivrosController < ApplicationController
   def destroy
     @livro.destroy
     respond_to do |format|
-      format.html { redirect_to livros_url, notice: 'Livro was successfully destroyed.' }
+      format.html { redirect_to admin_livros_path, notice: 'Livro was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

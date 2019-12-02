@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h2>Exibir Uo</h2>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <dl class="dl-horizontal">
+            <dt><strong>Publicacao:</strong></dt>
+            <dd><%= @livro.publicacao %></dd>
+            <dt><strong>Publicacao:</strong></dt>
+            <dd><%= ldate @livro.publicacao, :long %></dd>
+            <dt>Editora</dt>
+            <dd><%= @livro.editora.nome %></dd>
+          </dl>
+        </div>
 
-<p>
-  <strong>Titulo:</strong>
-  <%= @livro.titulo %>
-</p>
-
-<p>
-  <strong>Publicacao:</strong>
-  <%= @livro.publicacao %>
-</p>
-
-<p>
-  <strong>Editora:</strong>
-  <%= @livro.editora %>
-</p>
-
-<p>
-  <strong>Exemplar:</strong>
-  <%= @livro.exemplar %>
-</p>
-
-<%= link_to 'Edit', edit_livro_path(@livro) %> |
-<%= link_to 'Back', livros_path %>
+        <div class="form-actions">
+          <%= link_to "Voltar", admin_livros_path, :class => 'btn btn-default'  %>
+          <%= link_to "Editar",
+                      edit_admin_livro_path(@livro), :class => 'btn btn-default' %>
+          <%= link_to "Deletar",
+                      admin_livro_path(@livro),
+                      :method => 'delete',
+                      :data => { :confirm => 'Tem certeza?' },
+                      :class => 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

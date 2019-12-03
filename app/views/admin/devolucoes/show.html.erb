@@ -1,19 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Aluno:</strong>
-  <%= @devolucao.aluno %>
-</p>
-
-<p>
-  <strong>Bibliotecario:</strong>
-  <%= @devolucao.bibliotecario %>
-</p>
-
-<p>
-  <strong>Multa:</strong>
-  <%= @devolucao.multa %>
-</p>
-
-<%= link_to 'Edit', edit_devolucao_path(@devolucao) %> |
-<%= link_to 'Back', devolucoes_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h2>Exibir Devolucao</h2>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <dl class="dl-horizontal">
+            <dt><strong>Aluno:</strong></dt>
+            <dd><%= User.find(@devolucao.emprestimo.aluno_id).nome %></dd>
+            <dt><strong>Biblioitecario:</strong></dt>
+            <dd><%= User.find(@devolucao.emprestimo.bibliotecario_id).nome %></dd>
+            <dt><strong>Data devolucao:</strong></dt>
+            <dd><%= ldate @devolucao.created_at, :long %></dd>
+            <dt><strong>Multa:</strong></dt>
+            <dd>R$ <%= @devolucao.multa %></dd>
+        </div>
+        
+        <div class="form-actions">
+          <%= link_to "Voltar", admin_devolucoes_path, :class => 'btn btn-default'  %>
+          <%= link_to "Editar",
+                      edit_admin_devolucao_path(@devolucao), :class => 'btn btn-default' %>
+          <%= link_to "Deletar",
+                      admin_devolucao_path(@devolucao),
+                      :method => 'delete',
+                      :data => { :confirm => 'Tem certeza?' },
+                      :class => 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

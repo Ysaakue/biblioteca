@@ -7,9 +7,6 @@ class Admin::EmprestimosController < ApplicationController
     @q = Emprestimo.order("created_at DESC").search(params[:q])
     @emprestimos = @q.result.page(params[:page])
     @total_registros = @q.result.count
-
-    @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
-    @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
   end
   
   # GET /emprestimos/1
@@ -35,10 +32,14 @@ class Admin::EmprestimosController < ApplicationController
   # POST /emprestimos.json
   def create
     set_users
-    @emprestimo = Emprestimo.new(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev))
+    set_exemplares
+    @emprestimo = Emprestimo.new(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev, :exemplares => []))
+    @emprestimo.exemplares = params[:emprestimo][:exemplares]
+    @emprestimo.data_prev_dev = 10.days.after.to_date
 
     respond_to do |format|
       if @emprestimo.save
+        change_exemplares
         format.html { redirect_to admin_emprestimo_path(@emprestimo), notice: 'Emprestimo was successfully created.' }
         format.json { render :show, status: :created, location: @emprestimo }
       else
@@ -52,8 +53,10 @@ class Admin::EmprestimosController < ApplicationController
   # PATCH/PUT /emprestimos/1.json
   def update
     set_users
+    set_exemplares
+    @emprestimo.exemplares = params[:emprestimo][:exemplares]
     respond_to do |format|
-      if @emprestimo.update(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev))
+      if @emprestimo.update(params.require(:emprestimo).permit(:aluno_id, :bibliotecario_id, :data_prev_dev, :exemplares))
         format.html { redirect_to admin_emprestimo_path(@emprestimo), notice: 'Emprestimo was successfully updated.' }
         format.json { render :show, status: :ok, location: @emprestimo }
       else
@@ -81,7 +84,7 @@ class Admin::EmprestimosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def emprestimo_params
-      params.require(:emprestimo).permit(:aluno, :bibliotecario, :data_prev_dev)
+      params.require(:emprestimo).permit(:aluno, :bibliotecario, :data_prev_dev, :exemplares => [])
     end
 
     def set_users
@@ -89,4 +92,20 @@ class Admin::EmprestimosController < ApplicationController
       params[:emprestimo][:bibliotecario_id]= params[:emprestimo][:bibliotecario]
     end
 
+    def set_exemplares
+      exemplares = []
+      params[:emprestimo][:exemplares].each do |id|
+        if id != ""
+          exemplares << Exemplar.find(id)
+        end
+      end
+      params[:emprestimo][:exemplares] = exemplares
+    end
+
+    def change_exemplares
+      @emprestimo.exemplares.each do |exemplar|
+        exemplar.em_emprestimo = true
+        exemplar.save
+      end
+    end
 end

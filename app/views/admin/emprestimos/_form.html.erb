@@ -2,9 +2,10 @@
   <div class="col-sm-8">
     <%= simple_form_for([:admin, @emprestimo], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
       <div class="form-inputs">
-        <%=f.association :aluno, collection: @alunos%>
-        <%=f.association :bibliotecario, collection: @bibliotecarios%>
+        <%=f.association :aluno, collection: User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}%>
+        <%=f.association :bibliotecario, collection: User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}%>
         <%=f.input :data_prev_dev, as: :hidden, :input_html => { :value => Time.now } %>
+        <%=f.input :exemplares, collection: Exemplar.where("em_emprestimo = ?", false).all.collect {|e| [e.livro.titulo, e.id]}, input_html: { multiple: true }%>
       </div>
 
       <div class="form-actions">

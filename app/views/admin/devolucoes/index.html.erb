@@ -19,11 +19,11 @@
               </tr>
             </thead>
             <tbody>
-              <% @devolucoes.each do |uo| %>
+              <% @devolucoes.each do |devolucao| %>
                 <tr>
-                  <td><%= devolucao.aluno %></td>
-                  <td><%= devolucao.bibliotecario %></td>
-                  <td><%= devolucao.multa %></td>
+                  <td><%= User.find(devolucao.emprestimo.aluno_id).nome %></td>
+                  <td><%= User.find(devolucao.emprestimo.bibliotecario_id).nome %></td>
+                  <td>R$ <%= devolucao.multa %></td>
                   <td>
                     <%= link_to 'Exibir', admin_devolucao_path(devolucao), class: 'btn btn-xs btn-default' %>
                     <%= link_to 'Editar', edit_admin_devolucao_path(devolucao), class: 'btn btn-xs btn-default' %>

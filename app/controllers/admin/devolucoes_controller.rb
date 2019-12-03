@@ -20,6 +20,7 @@ class Admin::DevolucoesController < ApplicationController
   # GET /devolucoes/new
   def new
     @devolucao = Devolucao.new
+    @emprestimo_id = params[:emprestimo_id]
   end
 
   # GET /devolucoes/1/edit
@@ -30,10 +31,17 @@ class Admin::DevolucoesController < ApplicationController
   # POST /devolucoes.json
   def create
     @devolucao = Devolucao.new(devolucao_params)
-
+    
     respond_to do |format|
       if @devolucao.save
-        format.html { redirect_to @devolucao, notice: 'Devolução was successfully created.' }
+        dias = (@devolucao.created_at.to_date - @devolucao.emprestimo.data_prev_dev.to_date).to_i
+        if dias > 0
+          @devolucao.multa = dias*0.5
+        else
+          @devolucao.multa = 0.0
+        end
+        @devolucao.save
+        format.html { redirect_to admin_devolucoes_path, notice: 'Devolução was successfully created.' }
         format.json { render :show, status: :created, location: @devolucao }
       else
         format.html { render :new }
@@ -47,7 +55,7 @@ class Admin::DevolucoesController < ApplicationController
   def update
     respond_to do |format|
       if @devolucao.update(devolucao_params)
-        format.html { redirect_to @devolucao, notice: 'Devolucao was successfully updated.' }
+        format.html { redirect_to admin_devolucoes_path, notice: 'Devolucao was successfully updated.' }
         format.json { render :show, status: :ok, location: @devolucao }
       else
         format.html { render :edit }
@@ -61,7 +69,7 @@ class Admin::DevolucoesController < ApplicationController
   def destroy
     @devolucao.destroy
     respond_to do |format|
-      format.html { redirect_to devolucoes_url, notice: 'Devolução was successfully destroyed.' }
+      format.html { redirect_to admin_devolucoes_path, notice: 'Devolução was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -74,6 +82,13 @@ class Admin::DevolucoesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def devolucao_params
-      params.require(:devolucao).permit(:aluno_id, :bibliotecario_id, :multa)
+      params.require(:devolucao).permit(:aluno_id, :bibliotecario_id, :multa,:emprestimo_id)
+    end
+
+    def change_exemplares
+      @emprestimo.exemplares.each do |exemplar|
+        exemplar.em_emprestimo = false
+        exemplar.save
+      end
     end
 end

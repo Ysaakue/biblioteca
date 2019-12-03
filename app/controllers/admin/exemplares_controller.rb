@@ -28,7 +28,11 @@ class Admin::ExemplaresController < ApplicationController
   # POST /exemplares.json
   def create
     @exemplar = Exemplar.new(exemplar_params)
-
+    if params[:exemplar][:em_emprestimo]
+      @exemplar.em_emprestimo = true
+    else
+      @exemplar.em_emprestimo = false
+    end
     respond_to do |format|
       if @exemplar.save
         format.html { redirect_to admin_exemplar_path(@exemplar), notice: 'Exemplar was successfully created.' }
@@ -43,6 +47,11 @@ class Admin::ExemplaresController < ApplicationController
   # PATCH/PUT /exemplares/1
   # PATCH/PUT /exemplares/1.json
   def update
+    if params[:exemplar][:em_emprestimo]
+      @exemplar.em_emprestimo = true
+    else
+      @exemplar.em_emprestimo = false
+    end
     respond_to do |format|
       if @exemplar.update(exemplar_params)
         format.html { redirect_to admin_exemplar_path(@exemplar), notice: 'Exemplar was successfully updated.' }

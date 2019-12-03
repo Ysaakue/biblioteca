@@ -3,9 +3,10 @@
     <%= simple_form_for([:admin, @devolucao], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
 
       <div class="form-inputs">
-        <%= f.input :multa %>
+        <%= f.input :multa, as: :hidden %>
+        <%= f.input :emprestimo_id, as: :hidden, :input_html => { :value => @emprestimo_id }%>
       </div>
-
+      <h3> Deseja prosseguir?</h3>
       <div class="form-actions">
         <%= f.submit "Salvar", :class => 'btn btn-primary' %>
         <%= link_to "Cancelar", admin_devolucoes_path, :class => 'btn btn-default' %>

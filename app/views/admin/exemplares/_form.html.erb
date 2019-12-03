@@ -9,7 +9,17 @@
         <!--%= f.association :emprestimo %-->
         <%= f.input :aquisicao%>
         <%= f.input :situacao %>
-        <%= f.input :em_emprestimo %>
+        <% if :situacao %>
+          <div>
+            <input type="checkbox" id="exemplar[em_emprestimo]" name="exemplar[em_emprestimo]">
+            <label for="exemplar[:em_emprestimo]">Em emprestimo</label>
+          </div>
+        <% else %>
+          <div>
+            <label for="exemplar[:em_emprestimo]">Em emprestimo</label>
+            <input type="checkbox" id="exemplar[em_emprestimo]" name="exemplar[em_emprestimo]" value=>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-actions">

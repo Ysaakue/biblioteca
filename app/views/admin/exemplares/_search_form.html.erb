@@ -1,8 +1,8 @@
 <% content_for :action_buttons do %>
-  <% if can?(:create, "Devolucao".constantize) %>
-    <%= link_to new_admin_devolucao_path, class: 'btn btn-xs btn-primary right' do %>
+  <% if can?(:create, "Exemplar".constantize) %>
+    <%= link_to new_admin_exemplar_path, class: 'btn btn-xs btn-primary right' do %>
       <i class="fa fa-plus"></i>
-      Nova Devolução
+      Novo Exemplar
     <% end %>
   <% end %>
 <% end %>
@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :created_at_gteq, "data-provide" => 'datepicker', :value => @q.created_at_gteq.blank? ? nil : l(@q.created_at_gteq, :format => :long), :id => "devolucao_created_at", class: "form-control date-picker" %>
+        <%= s.text_field :created_at_gteq, "data-provide" => 'datepicker', :value => @q.created_at_gteq.blank? ? nil : l(@q.created_at_gteq, :format => :long), :id => "acao_created_at", class: "form-control date-picker" %>
         <span class="input-group-addon"><%= glyph(:calendar) %></span>
       </div>
     </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :created_at_lteq, "data-provide" => 'datepicker', :value => @q.created_at_lteq.blank? ? nil : l(@q.created_at_lteq, :format => :long), :id => "devolucao_created_at", class: "form-control date-picker" %>
+        <%= s.text_field :created_at_lteq, "data-provide" => 'datepicker', :value => @q.created_at_lteq.blank? ? nil : l(@q.created_at_lteq, :format => :long), :id => "acao_created_at", class: "form-control date-picker" %>
         <span class="input-group-addon"><%= glyph(:calendar) %></span>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <i class="fa fa-search"></i>
       Buscar
     <% end %>
-    <%= link_to admin_devolucoes_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
+    <%= link_to admin_exemplares_path, class: "btn btn-sm btn-default btn-filter-clear" do %>
       <i class="fa fa-remove"></i>
       Limpar
     <% end %>

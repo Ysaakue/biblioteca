@@ -1,29 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h2>Exibir Exemplar</h2>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <dl class="dl-horizontal">
+            <dt><strong>Livro:</strong></dt>
+            <dd><%= @exemplar.livro.titulo %></dd>
+            <dt><strong>Aquisicao:</strong></dt>
+            <dd><%= ldate @exemplar.aquisicao, :long %></dd>
+            <dt><strong>Situacao:</strong></dt>
+            <dd><%= @exemplar.situacao %></dd>
+            <dt><strong>Status:</strong></dt>
+            <% if @exemplar.em_emprestimo %>
+              <dd>Emprestado</dd>
+            <% else %>
+              <dd>Livre</dd>
+            <%end%>
+          </dl>
+        </div>
 
-<p>
-  <strong>Livro:</strong>
-  <%= @exemplar.livro %>
-</p>
-
-<p>
-  <strong>Emprestimo:</strong>
-  <%= @exemplar.emprestimo %>
-</p>
-
-<p>
-  <strong>Aquisicao:</strong>
-  <%= @exemplar.aquisicao %>
-</p>
-
-<p>
-  <strong>Situacao:</strong>
-  <%= @exemplar.situacao %>
-</p>
-
-<p>
-  <strong>Em emprestimo:</strong>
-  <%= @exemplar.em_emprestimo %>
-</p>
-
-<%= link_to 'Edit', edit_exemplar_path(@exemplar) %> |
-<%= link_to 'Back', exemplares_path %>
+        <div class="form-actions">
+          <%= link_to "Voltar", admin_exemplares_path, :class => 'btn btn-default'  %>
+          <%= link_to "Editar",
+                      edit_admin_exemplar_path(@exemplar), :class => 'btn btn-default' %>
+          <%= link_to "Deletar",
+                      admin_exemplar_path(@exemplar),
+                      :method => 'delete',
+                      :data => { :confirm => 'Tem certeza?' },
+                      :class => 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

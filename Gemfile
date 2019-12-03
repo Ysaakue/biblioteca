@@ -53,3 +53,4 @@ gem 'simple_form'
 gem 'byebug', group: [:development, :test]
 
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'bootstrap-datepicker-rails'

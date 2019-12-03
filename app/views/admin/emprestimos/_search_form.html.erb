@@ -9,13 +9,33 @@
 
 <% content_for :search_form do %>
   <%= search_form_for [:admin, @q], html: {class: "navbar-form navbar-left", id: "filter-form", role: "search" } do |s| %>
-    <div class="form-group margin-right-5">
-      <%= s.label :dt_prev_fim_gteq, "Data de devolução a partir de" %>
+  <div class="form-group margin-right-5">
+    <%= s.label :created_at_gteq, "Data de emprestimo a partir de" %>
+  </div>
+  <div class="form-group">
+    <div class="input-group datetime">
+      <%= s.text_field :created_at_gteq, "data-provide" => 'datepicker', :value => @q.created_at_gteq.blank? ? nil : l(@q.created_at_gteq, :format => :long), :id => "emprestimo_dt_prev_fim", class: "form-control date-picker" %>
+      <span class="input-group-addon"><%= glyph(:calendar) %></span>
+    </div>
+  </div>
+  <div class="form-group margin-right-5">
+    &nbsp;
+    <%= s.label :created_at_lteq, "a" %>
+  </div>
+  <div class="form-group">
+    <div class="input-group datetime">
+      <%= s.text_field :created_at_lteq, "data-provide" => 'datepicker', :value => @q.created_at_lteq.blank? ? nil : l(@q.created_at_lteq, :format => :long), :id => "emprestimo_dt_prev_fim", class: "form-control date-picker" %>
+      <span class="input-group-addon"><%= glyph(:calendar) %></span>
+    </div>
+  </div>
+  <br>
+  <div class="form-group margin-right-5">
+      <%= s.label :data_prev_dev_gteq, "Data de devolução a partir de" %>
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :data_prev_dev_gteq, :value => @q.data_prev_dev_gteq.blank? ? nil : l(@q.data_prev_dev_gteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <%= s.text_field :data_prev_dev_gteq, "data-provide" => 'datepicker', :value => @q.data_prev_dev_gteq.blank? ? nil : l(@q.data_prev_dev_gteq, :format => :long), :id => "emprestimo_dt_prev_fim", class: "form-control date-picker" %>
+        <span class="input-group-addon"><%= glyph(:calendar) %></span>
       </div>
     </div>
     <div class="form-group margin-right-5">
@@ -24,8 +44,8 @@
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :data_prev_dev_lteq, :value => @q.data_prev_dev_lteq.blank? ? nil : l(@q.data_prev_dev_lteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <%= s.text_field :data_prev_dev_lteq, "data-provide" => 'datepicker', :value => @q.data_prev_dev_lteq.blank? ? nil : l(@q.data_prev_dev_lteq, :format => :long), :id => "emprestimo_dt_prev_fim", class: "form-control date-picker" %>
+        <span class="input-group-addon"><%= glyph(:calendar) %></span>
       </div>
     </div>
     <%= link_to "", class: "btn btn-sm btn-success btn-filter-search" do %>

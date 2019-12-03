@@ -18,6 +18,10 @@
 //= require meiomask
 //= require nprogress
 //= require nprogress-ajax
+//= require bootstrap-datetimepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
 //= require_tree .
 jQuery(document).on("page:load turbolinks:load", function() {
   NProgress.configure({

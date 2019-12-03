@@ -1,13 +1,17 @@
-<%= simple_form_for(@reserva) do |f| %>
-  <%= f.error_notification %>
+<div class="row">
+  <div class="col-sm-8">
+    <%= simple_form_for([:admin, @reserva], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :livro %>
-    <%= f.input :retirado %>
-  </div>
+      <div class="form-inputs">
+        <%= f.association :aluno, collection:User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}%>
+        <%= f.association :livro, collection: Livro.order("titulo ASC").all.collect {|e| [e.titulo, e.id]} %>
+        <%= f.input :retirado %>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+      <div class="form-actions">
+        <%= f.submit "Salvar", :class => 'btn btn-primary' %>
+        <%= link_to "Cancelar", admin_reservas_path, :class => 'btn btn-default' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

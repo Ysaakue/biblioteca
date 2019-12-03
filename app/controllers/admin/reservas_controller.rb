@@ -4,7 +4,9 @@ class Admin::ReservasController < ApplicationController
   # GET /reservas
   # GET /reservas.json
   def index
-    @reservas = Reserva.all
+    @q = Reserva.order("created_at DESC").search(params[:q])
+    @reservas = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /reservas/1
@@ -28,7 +30,7 @@ class Admin::ReservasController < ApplicationController
 
     respond_to do |format|
       if @reserva.save
-        format.html { redirect_to @reserva, notice: 'Reserva was successfully created.' }
+        format.html { redirect_to admin_reserva_path(@reserva), notice: 'Reserva was successfully created.' }
         format.json { render :show, status: :created, location: @reserva }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class Admin::ReservasController < ApplicationController
   def update
     respond_to do |format|
       if @reserva.update(reserva_params)
-        format.html { redirect_to @reserva, notice: 'Reserva was successfully updated.' }
+        format.html { redirect_to admin_reserva_path(@reserva), notice: 'Reserva was successfully updated.' }
         format.json { render :show, status: :ok, location: @reserva }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class Admin::ReservasController < ApplicationController
   def destroy
     @reserva.destroy
     respond_to do |format|
-      format.html { redirect_to reservas_url, notice: 'Reserva was successfully destroyed.' }
+      format.html { redirect_to admin_reservas_path, notice: 'Reserva was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -6,8 +6,36 @@ module ApplicationHelper
     "<i class='fa #{glyphicon}'></i>".html_safe
   end
 
+  def glyph(icon)
+    glyphicon = "glyphicon-#{icon.to_s}"
+    "<span class='glyphicon #{glyphicon}'></span>".html_safe
+  end
+
   def display_flash_messages
     render "/layouts/messages"
+  end
+
+  def sortable(column, title = nil, params)
+    params_copy = params.dup
+    params_copy.delete(:sort)
+    params_copy.delete(:direction)
+
+    title ||= column.titleize
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+
+    icon = "chevron-up"
+    if direction == "desc"
+      icon = "chevron-down"
+    end
+    icon_span = glyph(icon)
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+
+    link_string = title
+    if column == sort_column
+      link_string = icon_span + "<span style='margin-left: 5px;'>#{title}</span>".html_safe
+    end
+
+    link_to link_string, {params: params_copy.to_unsafe_h, sort: column, direction: direction}, {:class => css_class}
   end
 
   def bootstrap_class_for(flash_type)

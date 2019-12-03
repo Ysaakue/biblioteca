@@ -1,15 +1,21 @@
-<%= simple_form_for(@exemplar) do |f| %>
-  <%= f.error_notification %>
+<div class="row">
+  <div class="col-sm-8">
+    <%= simple_form_for([:admin, @exemplar], wrapper: :vertical_form, html: { class: "form-vertical", role: "form" }) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.association :livro %>
-    <%= f.association :emprestimo %>
-    <%= f.input :aquisicao %>
-    <%= f.input :situacao %>
-    <%= f.input :em_emprestimo %>
-  </div>
+      <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+      <div class="form-inputs">
+        <%= f.association :livro, collection: Livro.order("titulo ASC").all.collect {|e| [e.titulo, e.id]} %>
+        <!--%= f.association :emprestimo %-->
+        <%= f.input :aquisicao%>
+        <%= f.input :situacao %>
+        <%= f.input :em_emprestimo %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Salvar", :class => 'btn btn-primary' %>
+        <%= link_to "Cancelar", admin_uos_path, :class => 'btn btn-default' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

@@ -11,22 +11,24 @@ class Admin::EmprestimosController < ApplicationController
     @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
     @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
   end
-
+  
   # GET /emprestimos/1
   # GET /emprestimos/1.json
   def show
   end
-
+  
   # GET /emprestimos/new
   def new
     @emprestimo = Emprestimo.new
     @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
     @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
-
+    
   end
-
+  
   # GET /emprestimos/1/edit
   def edit
+    @alunos = User.order("nome ASC").where("role_id = ?", 2).all.collect {|e| [e.nome, e.id]}
+    @bibliotecarios = User.order("nome ASC").where("role_id = ?", 3).all.collect {|e| [e.nome, e.id]}
   end
 
   # POST /emprestimos

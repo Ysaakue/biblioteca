@@ -14,13 +14,22 @@
       <%= s.search_field :titulo_cont, :class => "form-control" %>
     </div>
     <div class="form-group margin-right-5">
+      <%= s.label :publicacao_gteq, "Data de publicação a partir de" %>
+    </div>
+    <div class="form-group">
+      <div class="input-group datetime">
+        <%= s.text_field :publicacao_gteq, "data-provide" => 'datepicker', :value => @q.publicacao_gteq.blank? ? nil : l(@q.publicacao_gteq, :format => :long), :id => "livro_publicacao", class: "form-control date-picker" %>
+        <span class="input-group-addon"><%= glyph(:calendar) %></span>
+      </div>
+    </div>
+    <div class="form-group margin-right-5">
       &nbsp;
       <%= s.label :publicacao_lteq, "a" %>
     </div>
     <div class="form-group">
       <div class="input-group datetime">
-        <%= s.text_field :publicacao_lteq, :value => @q.publicacao_lteq.blank? ? nil : l(@q.publicacao_lteq, :format => :long), :id => "acao_dt_prev_fim", class: "form-control date-picker" %>
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <%= s.text_field :publicacao_lteq, "data-provide" => 'datepicker', :value => @q.publicacao_lteq.blank? ? nil : l(@q.publicacao_lteq, :format => :long), :id => "livro_publicacao", class: "form-control date-picker" %>
+        <span class="input-group-addon"><%= glyph(:calendar) %></i></span>
       </div>
     </div>
     <%= link_to "", class: "btn btn-sm btn-success btn-filter-search" do %>

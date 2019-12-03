@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191202210201) do
+ActiveRecord::Schema.define(version: 20191203170330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20191202210201) do
     t.boolean "em_emprestimo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "livro_id"
   end
 
   create_table "livros", force: :cascade do |t|
@@ -118,6 +119,8 @@ ActiveRecord::Schema.define(version: 20191202210201) do
     t.boolean "retirado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "livro_id"
   end
 
   create_table "roles", force: :cascade do |t|

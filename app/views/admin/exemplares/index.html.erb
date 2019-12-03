@@ -1,35 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Exemplares</h1>
+</div>
 
-<h1>Exemplares</h1>
+<%= render partial: "search_form" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Livro</th>
-      <th>Emprestimo</th>
-      <th>Aquisicao</th>
-      <th>Situacao</th>
-      <th>Em emprestimo</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @exemplares.each do |exemplar| %>
-      <tr>
-        <td><%= exemplar.livro %></td>
-        <td><%= exemplar.emprestimo %></td>
-        <td><%= exemplar.aquisicao %></td>
-        <td><%= exemplar.situacao %></td>
-        <td><%= exemplar.em_emprestimo %></td>
-        <td><%= link_to 'Show', exemplar %></td>
-        <td><%= link_to 'Edit', edit_exemplar_path(exemplar) %></td>
-        <td><%= link_to 'Destroy', exemplar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Exemplar', new_admin_exemplar_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Livro</th>
+                <th>Aquisicao</th>
+                <th>Situacao</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @exemplares.each do |exemplar| %>
+                <tr>
+                  <td><%= exemplar.id %></td>
+                  <td><%= exemplar.livro.titulo %></td>
+                  <td><%= exemplar.aquisicao %></td>
+                  <td><%= exemplar.situacao %></td>
+                  <% if exemplar.em_emprestimo %>
+                    <td>Emprestado</td>
+                  <% else %>
+                    <td>Livre</td>
+                  <% end %>
+                  <td>
+                    <%= link_to 'Exibir', admin_exemplar_path(exemplar), class: 'btn btn-xs btn-default' %>
+                    <%= link_to 'Editar', edit_admin_exemplar_path(exemplar), class: 'btn btn-xs btn-default' %>
+                    <%= link_to 'Deletar', admin_exemplar_path(exemplar), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-xs btn-danger' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @exemplares %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

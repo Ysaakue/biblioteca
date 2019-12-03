@@ -5,6 +5,9 @@ class Admin::ExemplaresController < ApplicationController
   # GET /exemplares.json
   def index
     @exemplares = Exemplar.all
+    @q = Exemplar.order("livro_id ASC").search(params[:q])
+    @exemplares = @q.result.page(params[:page])
+    @total_registros = @q.result.count
   end
 
   # GET /exemplares/1
@@ -28,7 +31,7 @@ class Admin::ExemplaresController < ApplicationController
 
     respond_to do |format|
       if @exemplar.save
-        format.html { redirect_to @exemplar, notice: 'Exemplar was successfully created.' }
+        format.html { redirect_to admin_exemplar_path(@exemplar), notice: 'Exemplar was successfully created.' }
         format.json { render :show, status: :created, location: @exemplar }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class Admin::ExemplaresController < ApplicationController
   def update
     respond_to do |format|
       if @exemplar.update(exemplar_params)
-        format.html { redirect_to @exemplar, notice: 'Exemplar was successfully updated.' }
+        format.html { redirect_to admin_exemplar_path(@exemplar), notice: 'Exemplar was successfully updated.' }
         format.json { render :show, status: :ok, location: @exemplar }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class Admin::ExemplaresController < ApplicationController
   def destroy
     @exemplar.destroy
     respond_to do |format|
-      format.html { redirect_to exemplares_url, notice: 'Exemplar was successfully destroyed.' }
+      format.html { redirect_to admin_exemplares_url, notice: 'Exemplar was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

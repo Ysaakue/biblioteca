@@ -1,6 +1,12 @@
 <div class="page-header">
   <h1>Livros</h1>
 </div>
+<small>
+  <%= link_to index_qnt_exemplares_admin_livros_path, class: 'btn btn-primary left' do %>
+    <i class="fa fa-search"></i>
+    Consultar Quantidade Exempalres
+  <% end %>
+</small><br><br><br>
 
 <%= render partial: "search_form" %>
 

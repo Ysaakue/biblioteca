@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     resources :devolucoes
     resources :exemplares
     resources :reservas
-    resources :livros
+    resources :livros do
+      collection do
+        get 'index_qnt_exemplares', as: 'index_qnt_exemplares'
+      end
+    end
     resources :editoras
     resources :assuntos
     resources :autores

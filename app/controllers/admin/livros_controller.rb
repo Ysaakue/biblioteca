@@ -9,6 +9,10 @@ class Admin::LivrosController < ApplicationController
     @total_registros = @q.result.count
   end
 
+  def index_qnt_exemplares
+    @livros = Livro.qnt_exemplares
+  end
+
   # GET /livros/1
   # GET /livros/1.json
   def show

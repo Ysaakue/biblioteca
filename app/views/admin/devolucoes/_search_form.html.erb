@@ -1,10 +1,5 @@
 <% content_for :action_buttons do %>
-  <% if can?(:create, "Devolucao".constantize) %>
-    <%= link_to new_admin_devolucao_path, class: 'btn btn-xs btn-primary right' do %>
-      <i class="fa fa-plus"></i>
-      Nova Devolução
-    <% end %>
-  <% end %>
+
 <% end %>
 
 <% content_for :search_form do %>

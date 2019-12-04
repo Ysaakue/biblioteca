@@ -16,7 +16,25 @@
             <dt><strong>Multa:</strong></dt>
             <dd>R$ <%= @devolucao.multa %></dd>
         </div>
-        
+        <dt>Exemplares:</dt>
+          <dd>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>livro</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @devolucao.emprestimo.exemplares.each do |exemplar| %>
+                  <tr>
+                    <td><%= exemplar.id %></td>
+                    <td><%= exemplar.livro.titulo %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </dd>
         <div class="form-actions">
           <%= link_to "Voltar", admin_devolucoes_path, :class => 'btn btn-default'  %>
           <%= link_to "Editar",

@@ -31,12 +31,12 @@ class Admin::DevolucoesController < ApplicationController
   # POST /devolucoes.json
   def create
     @devolucao = Devolucao.new(devolucao_params)
-    
+    change_exemplares
     respond_to do |format|
       if @devolucao.save
-        dias = (@devolucao.created_at.to_date - @devolucao.emprestimo.data_prev_dev.to_date).to_i
+        dias = ( 12.days.after.to_date - @devolucao.emprestimo.data_prev_dev.to_date).to_i
         if dias > 0
-          @devolucao.multa = dias*0.5
+          @devolucao.multa = dias*5.0*@devolucao.emprestimo.exemplares.count
         else
           @devolucao.multa = 0.0
         end
@@ -86,7 +86,7 @@ class Admin::DevolucoesController < ApplicationController
     end
 
     def change_exemplares
-      @emprestimo.exemplares.each do |exemplar|
+      @devolucao.emprestimo.exemplares.each do |exemplar|
         exemplar.em_emprestimo = false
         exemplar.save
       end

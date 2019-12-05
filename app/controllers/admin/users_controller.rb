@@ -33,6 +33,9 @@ class Admin::UsersController < ApplicationController
   def show
   end
 
+  def emprestimos_devolucoes
+    @users = User.emprestimos_devolucoes
+  end
   # GET /users/new
   def new
     @user = User.new

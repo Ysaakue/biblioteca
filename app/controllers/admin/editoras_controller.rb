@@ -14,6 +14,11 @@ class Admin::EditorasController < ApplicationController
   def show
   end
 
+  def estatisticas
+    @qnt_por_estado = Editora.qnt_por_estado
+    @qnt_livro_por_editora = Editora.qnt_livro_por_editora
+  end
+
   # GET /editoras/new
   def new
     @editora = Editora.new

@@ -29,7 +29,9 @@
                   <td>
                     <%= link_to 'Exibir', admin_emprestimo_path(emprestimo), class: 'btn btn-xs btn-default' %>
                     <%= link_to 'Editar', edit_admin_emprestimo_path(emprestimo), class: 'btn btn-xs btn-default' %>
-                    <%= link_to 'Devolver', new_admin_devolucao_path(emprestimo_id: emprestimo.id), class: 'btn btn-xs btn-primary' %>
+                    <% if emprestimo.devolucao == nil %>
+                      <%= link_to 'Devolver', new_admin_devolucao_path(emprestimo_id: emprestimo.id), class: 'btn btn-xs btn-primary' %>
+                    <% end %>
                     <%= link_to 'Deletar', admin_emprestimo_path(emprestimo), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-xs btn-danger' %>
                   </td>
                 </tr>

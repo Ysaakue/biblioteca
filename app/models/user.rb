@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
     end
     self.role_id = 1
   end
+
+  def self.emprestimos_devolucoes
+    connection.select_all "select users.id,users.nome, count(emprestimos.id) as emprestimo,max(devolucoes.multa) as multa_max, avg(devolucoes.multa) as multa_media, sum(devolucoes.multa) as multa_total from users left join emprestimos on emprestimos.aluno_id = users.id left join devolucoes on devolucoes.emprestimo_id = emprestimos.id where users.role_id = 2 group by users.id;"
+  end
 end

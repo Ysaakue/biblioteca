@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   # Resources - Admin
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        get 'emprestimos_devolucoes', as: 'emprestimos_devolucoes'
+      end
+    end
     resources :uos do
       collection do
         get 'update_cidades', as: 'update_cidades'
@@ -19,7 +23,11 @@ Rails.application.routes.draw do
         get 'index_qnt_exemplares', as: 'index_qnt_exemplares'
       end
     end
-    resources :editoras
+    resources :editoras do
+      collection do
+        get 'estatisticas', as: 'estatisticas'
+      end
+    end
     resources :assuntos
     resources :autores
   end

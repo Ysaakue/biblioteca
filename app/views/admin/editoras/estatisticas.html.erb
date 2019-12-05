@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h2>Estatísticas Editora</h2>
+			</div>
+			<div class="ibox-content">
+				<div class="row">
+					<dl class="dl-horizontal">
+						<dt>Quantidade por Estado:</dt>
+						<dd>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Estado</th>
+										<th>Quant. Por Estado</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% @qnt_por_estado.each do |row| %>
+										<tr>
+											<td><%= Estado.find(row['estado_id']).nome %></td>
+											<td><%= row['count'] %></td>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</dd>
+					</dl>
+				</div>
+
+				<div class="row">
+					<dl class="dl-horizontal">
+						<dt>Quantidade de Livros:</dt>
+						<dd>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Estado</th>
+										<th>Quant. Livros</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% @qnt_livro_por_editora.each do |row| %>
+										<tr>
+											<td><%= Editora.find(row['id']).nome %></td>
+											<td><%= row['qnt_livros'] %></td>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</dd>
+					</dl>
+				</div>
+				<div class="form-actions">
+					<%= link_to "Voltar", admin_editoras_path, :class => 'btn btn-default'  %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
